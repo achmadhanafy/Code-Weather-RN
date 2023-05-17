@@ -4,8 +4,7 @@ import {SafeAreaView} from 'react-native-safe-area-context';
 import style from './style';
 import {Color} from '../../config/Color';
 
-function Container(props) {
-  const {children, colorScheme, statusBarStyle, statusBarColor} = props;
+function Container({children, colorScheme, statusBarStyle, statusBarColor}) {
   return (
     <SafeAreaView
       edges={['top']}
