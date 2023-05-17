@@ -6,27 +6,27 @@ import {Color} from '../../../../../../config/Color';
 import {Text} from '../../../../../../component';
 
 function HeaderSection(props) {
-  const {colorScheme} = props;
+  const {colorScheme, hookData} = props;
   return (
     <View style={style.container}>
       <View style={style.top}>
         <Image source={Icon} style={style.image} />
         <View>
           <Text size={14} color={Color.black[colorScheme]}>
-            Broken clouds
+            {hookData?.headerData?.desc}
           </Text>
           <Text size={12} color={Color.neutral[colorScheme]}>
-            Light Air
+            {hookData?.headerData?.subDesc}
           </Text>
         </View>
       </View>
 
       <Text weight="100" size={56}>
-        29°C
+        {hookData?.headerData?.temp}°C
       </Text>
 
       <Text size={12} color={Color.neutral[colorScheme]}>
-        Feels like 34°C
+        Feels like {hookData?.headerData?.feels}°C
       </Text>
     </View>
   );
