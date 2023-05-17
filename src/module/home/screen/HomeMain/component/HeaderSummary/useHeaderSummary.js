@@ -31,7 +31,7 @@ const useHeaderSummary = () => {
     {
       label: 'Dew Point',
       value: 19,
-      unit: ' C',
+      unit: '°C',
     },
   ]);
 

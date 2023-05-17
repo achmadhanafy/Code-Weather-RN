@@ -22,11 +22,11 @@ function HeaderSection(props) {
       </View>
 
       <Text weight="100" size={56}>
-        29 C
+        29°C
       </Text>
 
       <Text size={12} color={Color.neutral[colorScheme]}>
-        Feels like 34 C
+        Feels like 34°C
       </Text>
     </View>
   );
