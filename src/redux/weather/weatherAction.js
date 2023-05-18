@@ -33,3 +33,8 @@ export const getHourWeatherClear = payload => ({
   type: CONST.GET_HOUR_WEATHER_CLEAR,
   payload,
 });
+
+export const setLocation = payload => ({
+  type: CONST.SET_LOCATION,
+  payload,
+});

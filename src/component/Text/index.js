@@ -8,15 +8,16 @@ function TextCustom({
   color = Color.black.light,
   align = 'left',
   weight = 'normal',
+  style = {},
 }) {
-  const style = {
+  const styling = {
     fontSize: size,
     color,
     textAlign: align,
     fontWeight: weight,
   };
 
-  return <Text style={style}>{children}</Text>;
+  return <Text style={[styling, style]}>{children}</Text>;
 }
 
 export default TextCustom;

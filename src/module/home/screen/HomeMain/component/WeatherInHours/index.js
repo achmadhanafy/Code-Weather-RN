@@ -39,9 +39,9 @@ function WeatherInHours(props) {
         </Text>
         <Image
           source={{uri: icon_uri + item?.icon + '@2x.png'}}
-          style={{width: 25, height: 25, marginVertical: 5}}
+          style={style.image}
         />
-        <Text size={12} color={Color.black[colorScheme]}>
+        <Text size={14} color={Color.black[colorScheme]}>
           {item?.temp?.toFixed(0)}° C
         </Text>
       </View>

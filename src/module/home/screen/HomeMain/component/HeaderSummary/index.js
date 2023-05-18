@@ -21,7 +21,7 @@ function HeaderSummary(props) {
       <View style={style.rowContainer}>
         {hookData.summaryData?.map((element, i) => (
           <View style={[style.item, {justifyContent: justifyContent(i)}]}>
-            <Text size={12} weight="500">
+            <Text size={12} weight="bold">
               {element.label}: {element.value}
               {element.unit}
             </Text>

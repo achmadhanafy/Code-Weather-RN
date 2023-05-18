@@ -13,3 +13,8 @@ export const getHourWeatherInitialState = {
   },
   getHourWeatherParam: {},
 };
+
+export const locationInitialState = {
+  latitude: null,
+  longitude: null,
+};

@@ -7,6 +7,7 @@ import {
 const useHeaderSection = () => {
   const [headerData, setHeaderData] = useState({
     desc: '',
+    location: '',
     subDesc: '',
     icon: null,
     temp: '',
@@ -18,8 +19,9 @@ const useHeaderSection = () => {
       desc: capitalizeFirstLetter(
         getCurrentWeatherResponse.weather[0]?.description,
       ),
-      subDesc: getWindScale(getCurrentWeatherResponse?.wind?.speed),
+      subDesc: getWindScale(getCurrentWeatherResponse?.wind?.speed?.toFixed(0)),
       icon: getCurrentWeatherResponse.weather[0]?.icon,
+      location: getCurrentWeatherResponse?.name,
       temp: getCurrentWeatherResponse.main?.temp?.toFixed(0),
       feels: getCurrentWeatherResponse.main?.feels_like?.toFixed(0),
     };

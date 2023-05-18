@@ -2,8 +2,8 @@ import {SIZE} from '../../../../../../util/constant';
 
 export default {
   container: {
-    paddingHorizontal: 5,
-    paddingVertical: 10,
+    paddingHorizontal: 10,
+    paddingVertical: 16,
     borderRadius: 8,
     marginTop: 16,
   },
@@ -15,6 +15,6 @@ export default {
   },
   item: {
     flexDirection: 'row',
-    minWidth: (SIZE.screen.width - 42) / 3,
+    minWidth: (SIZE.screen.width - 52) / 3,
   },
 };

@@ -8,6 +8,8 @@ import WeatherInHours from './component/WeatherInHours';
 import useHeaderSummary from './component/HeaderSummary/useHeaderSummary';
 import useWeatherInHours from './component/WeatherInHours/useWeatherInHours';
 import useHeaderSection from './component/HeaderSection/useHeaderSection';
+import useWeatherInDays from './component/WeatherInDays/useWeatherInDays';
+import {ScrollView} from 'react-native-gesture-handler';
 
 function HomeMain(props) {
   const {
@@ -15,25 +17,27 @@ function HomeMain(props) {
     getCurrentWeather,
     getHourWeather,
     getHourWeatherResponse,
+    location,
   } = props;
   const colorScheme = 'light';
   const headerSection = useHeaderSection();
   const headerSummary = useHeaderSummary();
   const weatherInHours = useWeatherInHours();
+  const weatherInDay = useWeatherInDays();
 
   // Fetch current weather
   useEffect(() => {
     getCurrentWeather({
-      lat: '-6.473816',
-      lon: '106.754887',
+      lat: location?.latitude,
+      lon: location?.longitude,
       units: 'metric',
     });
     getHourWeather({
-      lat: '-6.473816',
-      lon: '106.754887',
+      lat: location?.latitude,
+      lon: location?.longitude,
       units: 'metric',
     });
-  }, []);
+  }, [location]);
 
   // Store data current weather to hooks
   useEffect(() => {
@@ -47,17 +51,20 @@ function HomeMain(props) {
   useEffect(() => {
     if (getHourWeatherResponse?.list) {
       weatherInHours.callbackWeathers(getHourWeatherResponse);
+      weatherInDay.callbackWeatherInDay(getHourWeatherResponse);
     }
   }, [getHourWeatherResponse]);
 
   return (
     <Container colorScheme={colorScheme}>
-      <View style={{paddingHorizontal: 16}}>
-        <HeaderSection hookData={headerSection} colorScheme={colorScheme} />
-        <HeaderSummary hookData={headerSummary} colorScheme={colorScheme} />
-        <WeatherInHours hookData={weatherInHours} colorScheme={colorScheme} />
-        <WeatherInDays hookData={weatherInHours} colorScheme={colorScheme} />
-      </View>
+      <ScrollView>
+        <View style={{paddingHorizontal: 16}}>
+          <HeaderSection hookData={headerSection} colorScheme={colorScheme} />
+          <HeaderSummary hookData={headerSummary} colorScheme={colorScheme} />
+          <WeatherInHours hookData={weatherInHours} colorScheme={colorScheme} />
+          <WeatherInDays hookData={weatherInDay} colorScheme={colorScheme} />
+        </View>
+      </ScrollView>
     </Container>
   );
 }

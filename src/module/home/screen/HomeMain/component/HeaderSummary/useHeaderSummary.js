@@ -10,7 +10,7 @@ const useHeaderSummary = () => {
       key: 'wind',
     },
     {
-      label: 'Humadity',
+      label: 'Humidity',
       value: 57,
       unit: '%',
       key: 'humadity',

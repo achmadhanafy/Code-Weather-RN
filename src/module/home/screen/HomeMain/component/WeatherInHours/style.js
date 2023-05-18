@@ -5,4 +5,5 @@ export default {
     alignItems: 'center',
     marginVertical: 16,
   },
+  image: {width: 25, height: 25, marginVertical: 5},
 };

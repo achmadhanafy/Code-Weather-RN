@@ -2,11 +2,13 @@ import * as CONST from './weatherConstant';
 import {
   getCurrentWeatherInitialState,
   getHourWeatherInitialState,
+  locationInitialState,
 } from './weatherInitialState';
 
 const weatherInitialState = {
   ...getCurrentWeatherInitialState,
   ...getHourWeatherInitialState,
+  ...locationInitialState,
   action: '',
 };
 
@@ -58,6 +60,15 @@ export const weatherReducer = (state = weatherInitialState, action) => {
     [CONST.GET_HOUR_WEATHER_CLEAR]: () => ({
       ...state,
       ...getHourWeatherInitialState,
+      action: type,
+    }),
+
+    [CONST.SET_LOCATION]: () => ({
+      ...state,
+      location: {
+        latitude: payload.latitude,
+        longitude: payload.longitude,
+      },
       action: type,
     }),
 
