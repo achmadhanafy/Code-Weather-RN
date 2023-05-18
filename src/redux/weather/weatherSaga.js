@@ -1,6 +1,11 @@
 import {call, put, takeLatest} from 'redux-saga/effects';
-import {getCurrentWeatherApi} from './weatherApi';
-import {getCurrentWeatherError, getCurrentWeatherSucess} from './weatherAction';
+import {getCurrentWeatherApi, getHourWeatherApi} from './weatherApi';
+import {
+  getCurrentWeatherError,
+  getCurrentWeatherSucess,
+  getHourWeatherError,
+  getHourWeatherSucess,
+} from './weatherAction';
 import * as CONST from './weatherConstant';
 
 function* getCurrentWeather(params) {
@@ -12,6 +17,18 @@ function* getCurrentWeather(params) {
   }
 }
 
-const weatherSaga = [takeLatest(CONST.GET_CURRENT_WEATHER, getCurrentWeather)];
+function* getHourWeather(params) {
+  try {
+    const response = yield call(getHourWeatherApi, params.payload);
+    yield put(getHourWeatherSucess(response?.data));
+  } catch (error) {
+    yield put(getHourWeatherError(error?.response?.data));
+  }
+}
+
+const weatherSaga = [
+  takeLatest(CONST.GET_CURRENT_WEATHER, getCurrentWeather),
+  takeLatest(CONST.GET_HOUR_WEATHER, getHourWeather),
+];
 
 export default weatherSaga;

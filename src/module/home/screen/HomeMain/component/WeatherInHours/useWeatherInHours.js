@@ -1,48 +1,22 @@
-import React, {useState} from 'react';
-import {Icon} from '../../../../../../config/Image';
+import React, {useCallback, useState} from 'react';
 
 const useWeatherInHours = () => {
-  const [weathers, setWeathers] = useState([
-    {
-      id: 1,
-      date: '2022-12-10 15:00:00',
-      icon: Icon,
-      temp: 27,
-    },
-    {
-      id: 2,
-      date: '2022-12-10 15:00:00',
-      icon: Icon,
-      temp: 27,
-    },
-    {
-      id: 3,
-      date: '2022-12-10 15:00:00',
-      icon: Icon,
-      temp: 27,
-    },
-    {
-      id: 4,
-      date: '2022-12-10 15:00:00',
-      icon: Icon,
-      temp: 27,
-    },
-    {
-      id: 5,
-      date: '2022-12-10 15:00:00',
-      icon: Icon,
-      temp: 27,
-    },
-    {
-      id: 5,
-      date: '2022-12-10 15:00:00',
-      icon: Icon,
-      temp: 27,
-    },
-  ]);
+  const [weathers, setWeathers] = useState([]);
+
+  const callbackWeathers = useCallback(getHourWeatherResponse => {
+    const data = getHourWeatherResponse?.list?.map(element => ({
+      id: element?.dt,
+      date: element?.dt_txt,
+      icon: element?.weather[0]?.icon,
+      temp: element?.main?.temp,
+    }));
+    setWeathers(data);
+  }, []);
+
   return {
     weathers,
     setWeathers,
+    callbackWeathers,
   };
 };
 

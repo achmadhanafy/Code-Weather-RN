@@ -4,19 +4,26 @@ import style from './style';
 import {Icon} from '../../../../../../config/Image';
 import {Color} from '../../../../../../config/Color';
 import {Text} from '../../../../../../component';
+import {icon_uri} from '../../../../../../util/config';
 
 function HeaderSection(props) {
   const {colorScheme, hookData} = props;
+  const {headerData} = hookData;
   return (
     <View style={style.container}>
       <View style={style.top}>
-        <Image source={Icon} style={style.image} />
+        <Image
+          source={{
+            uri: icon_uri + headerData?.icon + '@2x.png',
+          }}
+          style={style.image}
+        />
         <View>
           <Text size={14} color={Color.black[colorScheme]}>
-            {hookData?.headerData?.desc}
+            {headerData?.desc}
           </Text>
           <Text size={12} color={Color.neutral[colorScheme]}>
-            {hookData?.headerData?.subDesc}
+            {headerData?.subDesc}
           </Text>
         </View>
       </View>

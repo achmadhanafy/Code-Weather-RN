@@ -10,3 +10,5 @@ export const api_25 = axios.create({
   },
   baseURL: BASE_URL_25,
 });
+
+export const icon_uri = 'https://openweathermap.org/img/wn/';

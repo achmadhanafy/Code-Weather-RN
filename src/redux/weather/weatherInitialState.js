@@ -5,3 +5,11 @@ export const getCurrentWeatherInitialState = {
   },
   getCurrentWeatherParam: {},
 };
+
+export const getHourWeatherInitialState = {
+  getHourWeatherResponse: {},
+  getHourWeatherError: {
+    message: {},
+  },
+  getHourWeatherParam: {},
+};

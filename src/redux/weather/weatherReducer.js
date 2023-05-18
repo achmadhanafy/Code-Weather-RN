@@ -1,12 +1,12 @@
 import * as CONST from './weatherConstant';
 import {
-  getPokemonDetailInitialState,
   getCurrentWeatherInitialState,
+  getHourWeatherInitialState,
 } from './weatherInitialState';
 
 const weatherInitialState = {
   ...getCurrentWeatherInitialState,
-  ...getPokemonDetailInitialState,
+  ...getHourWeatherInitialState,
   action: '',
 };
 
@@ -35,6 +35,29 @@ export const weatherReducer = (state = weatherInitialState, action) => {
     [CONST.GET_CURRENT_WEATHER_CLEAR]: () => ({
       ...state,
       ...getCurrentWeatherInitialState,
+      action: type,
+    }),
+
+    [CONST.GET_HOUR_WEATHER]: () => ({
+      ...state,
+      getHourWeatherParam: payload,
+      action: type,
+    }),
+    [CONST.GET_HOUR_WEATHER_SUCCESS]: () => ({
+      ...state,
+      getHourWeatherResponse: payload,
+      getHourWeatherError: getHourWeatherInitialState.getHourWeatherError,
+      action: type,
+    }),
+    [CONST.GET_HOUR_WEATHER_ERROR]: () => ({
+      ...state,
+      getHourWeatherError: payload,
+      getHourWeatherResponse: getHourWeatherInitialState.getHourWeatherResponse,
+      action: type,
+    }),
+    [CONST.GET_HOUR_WEATHER_CLEAR]: () => ({
+      ...state,
+      ...getHourWeatherInitialState,
       action: type,
     }),
 

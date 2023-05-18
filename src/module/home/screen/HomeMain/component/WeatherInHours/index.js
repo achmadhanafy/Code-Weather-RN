@@ -5,28 +5,44 @@ import {Icon} from '../../../../../../config/Image';
 import {Text} from '../../../../../../component';
 import {Color} from '../../../../../../config/Color';
 import {FlatList} from 'react-native-gesture-handler';
+import moment from 'moment';
+import {icon_uri} from '../../../../../../util/config';
 
 function WeatherInHours(props) {
   const {colorScheme, hookData} = props;
+  const {weathers} = hookData;
 
-  const Item = () => {
+  const renderTime = time => {
+    const getData = moment(time).format('MMM D HH:mm');
+    const splitData = getData?.split(' ');
+    const splitTimeData = splitData?.[2]?.split(':');
+
+    const getToday = moment(new Date()).format('MMM D HH:mm');
+    const splitToday = getToday?.split(' ');
+
+    if (
+      splitData[1] !== splitToday[1] &&
+      (splitTimeData[0] === '00' ||
+        splitTimeData[0] === '01' ||
+        splitTimeData[0] === '02')
+    ) {
+      return moment(time).format('MMM D');
+    }
+    return moment(time).format('HH:mm');
+  };
+
+  const renderItem = item => {
     return (
-      <View
-        style={{
-          flexDirection: 'column',
-          width: 70,
-          alignItems: 'center',
-          marginVertical: 16,
-        }}>
+      <View style={style.container}>
         <Text size={12} color={Color.neutral[colorScheme]}>
-          May 18
+          {renderTime(item?.date)}
         </Text>
         <Image
-          source={Icon}
+          source={{uri: icon_uri + item?.icon + '@2x.png'}}
           style={{width: 25, height: 25, marginVertical: 5}}
         />
         <Text size={12} color={Color.black[colorScheme]}>
-          27° C
+          {item?.temp?.toFixed(0)}° C
         </Text>
       </View>
     );
@@ -35,11 +51,14 @@ function WeatherInHours(props) {
   return (
     <FlatList
       horizontal
-      data={hookData.weathers}
-      renderItem={({item}) => (
-        <Item date={item.date} icon={item.icon} temp={item.temp} />
-      )}
-      keyExtractor={(item) => item.id}
+      data={weathers}
+      renderItem={
+        ({item}) => {
+          return renderItem(item);
+        }
+        // <Item date={item.date} icon={item.icon} temp={item.temp} />
+      }
+      keyExtractor={item => item.id}
     />
   );
 }
